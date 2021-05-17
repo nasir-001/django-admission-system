@@ -1,11 +1,17 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+GENDER = (
+  ('M', "Male"),
+  ('F', "Female"),
+)
+
 # Create your models here.
 class User(AbstractUser):
   first_name = models.CharField(max_length=30)
   last_name = models.CharField(max_length=30)
   email = models.EmailField(unique=True, blank=False, error_messages={'unique': "A user with that email already exists."})
+  gender = models.CharField(choices=GENDER, max_length=1, null=True)
   dob = models.DateField(null=True)
 
   def __str__(self):
